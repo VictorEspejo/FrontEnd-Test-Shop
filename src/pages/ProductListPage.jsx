@@ -1,6 +1,7 @@
 import React from "react";
-import PropTypes from "prop-types";
 import { useNavigate } from "react-router-dom";
+import { Input, Grid, Typography } from '@mui/material';
+
 
 const ProductListPage = (props) => {
   const navigate = useNavigate();
@@ -11,7 +12,21 @@ const ProductListPage = (props) => {
     },
     [navigate]
   );
-  return <div>ProductListPage</div>;
+  return (
+    <Grid container>
+      <Grid item xs={8}>
+        <Typography variant="h5" color="initial">
+          List View
+        </Typography>
+      </Grid>
+      <Grid item xs={3}>
+        <Input placeholder="Buscar Productos" inputProps={'fadsf'} />
+      </Grid>
+      <Grid item xs={12}>
+        
+      </Grid>
+    </Grid>
+  );
 };
 
 ProductListPage.propTypes = {};
