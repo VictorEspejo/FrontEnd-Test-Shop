@@ -1,9 +1,49 @@
-import React from 'react'
+import React from "react";
+import PropTypes from "prop-types";
+import {
+  Card,
+  CardMedia,
+  CardContent,
+  Typography,
+  CardActions,
+  Button,
+} from "@mui/material";
 
-const ProductItem = () => {
+const ProductItem = ({
+  product: {id, imgUrl, brand,model, price}
+}) => {
   return (
-    <div>ProductItem</div>
-  )
-}
+    <Card sx={{ maxWidth: 345 }}>
+      <CardMedia
+        component="img"
+        width="300"
+        height="300"
+        image={imgUrl}
+        alt={`${brand}-${model}`}
+      />
+      <CardContent>
+        <Typography gutterBottom variant="h5" component="div">
+          { model }
+        </Typography>
+        <Typography variant="body2" color="secondary">
+          { brand }
+        </Typography>
+      </CardContent>
+      <CardActions>
+        <Button size="small">{ price }€</Button>
+      </CardActions>
+    </Card>
+  );
+};
 
-export default ProductItem
+ProductItem.propTypes = {
+  product: PropTypes.shape({
+    id: PropTypes.string,
+    brand: PropTypes.string,
+    model: PropTypes.string,
+    price: PropTypes.string,
+    imgUrl: PropTypes.string,
+  }).isRequired
+};
+
+export default ProductItem;
