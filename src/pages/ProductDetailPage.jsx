@@ -1,5 +1,6 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useCallback } from "react";
 import { connect } from 'react-redux';
+import { ACTIONS } from "../reducers";
 import { useParams } from "react-router-dom";
 import PropTypes from "prop-types";
 import { ENDPOINTS } from "../constants";
@@ -23,10 +24,15 @@ const ProductDetailPage = ({ productId, addProduct }) => {
     });
   }, []);
 
-  const addToCart = (productInfo) => {
-    const product = { ...productInfo, id: prodId };
-    debugger;
-  };
+  const addToCart = useCallback(
+    (productInfo) => {
+      const productCart = { ...productInfo, productId: prodId };
+      addProduct(productCart);
+    },
+    [addProduct]
+  );
+
+
 
   return (
     <div>
@@ -55,9 +61,9 @@ ProductDetailPage.propTypes = {
 };
 
 const mapDispatchToProps = (dispatch) => { 
-  return ({
-    addProduct: value => ({type: 'ADD_PRODUCT', payload: value})
-  })
+  return {
+    addProduct: (value) => dispatch({ type: ACTIONS.addProduct, payload: value }),
+  };
  }
 
 export default connect(null, mapDispatchToProps)(ProductDetailPage);

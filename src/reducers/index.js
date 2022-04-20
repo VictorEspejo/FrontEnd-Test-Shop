@@ -1,8 +1,21 @@
 const initialValue = {
-    products: [{id: 0, color: 0, storage: 0 }]
+  products: [],
 };
-const reducer = (state = initialValue, action) => { 
-    return state;
- }
 
- export default reducer;
+export const ACTIONS = {
+  addProduct: "ADD_PRODUCT",
+  removeProduct: "REMOVE_PRODUCT",
+};
+
+const reducer = (state = initialValue, action) => {
+  switch (action.type) {
+    case ACTIONS.addProduct:
+      return [...state.products, action.payload];
+    case ACTIONS.removeProduct:
+      return state.products.filter((product) => product.id === action.payload);
+    default:
+      return state;
+  }
+};
+
+export default reducer;
