@@ -5,7 +5,7 @@ import {
   Grid,
 } from "@mui/material";
 import ProductInfoAction from "../ProductInfoAction/ProductInfoAction";
-import ProductInfoDescription from "../ProductInfoDescription";
+import ProductInfoDescription from "../ProductInfoDescription/ProductInfoDescription";
 
 function ProductInfo(product) {
   const [cantidad, setcantidad] = useState(0);

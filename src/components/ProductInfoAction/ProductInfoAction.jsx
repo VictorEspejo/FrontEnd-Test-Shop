@@ -45,7 +45,7 @@ const ProductInfoAction = (props) => {
           </Grid>
         </CardContent>
         <CardActionArea>
-                    <Button  color={"primary"}>Añadir al carrito</Button>
+            <Button color={"primary"} >Añadir al carrito</Button>
         </CardActionArea>
       </Card>
     </Grid>
