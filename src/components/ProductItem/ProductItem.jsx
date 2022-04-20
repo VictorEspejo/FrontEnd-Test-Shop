@@ -16,8 +16,8 @@ const ProductItem = ({
     <Card sx={{ maxWidth: 345 }}>
       <CardMedia
         component="img"
-        width="300"
-        height="300"
+        width="200"
+        height="200"
         image={imgUrl}
         alt={`${brand}-${model}`}
       />

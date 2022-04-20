@@ -2,6 +2,9 @@ import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import PropTypes from "prop-types";
 import { ENDPOINTS } from "../constants";
+import { Grid, Box } from "@mui/material";
+import { mapProductInfo } from "../utils/productsUtils";
+import ProductInfo from "../components/ProductInfo/ProductInfo";
 
 const getProductDetail = (id) => {
   const apiEndpoint = ENDPOINTS.GET_PRODUCT_DETAIL.replace(":id", id);
@@ -14,10 +17,31 @@ const ProductDetailPage = ({ productId }) => {
   const prodId = productId || id;
 
   useEffect(() => {
-    getProductDetail(prodId).then((res) => setProduct(res));
+    getProductDetail(prodId).then((res) => {
+      setProduct(mapProductInfo(res));
+    });
   }, []);
 
-  return <></>;
+  return (
+    <div>
+      <Grid
+        container
+        spacing={2}
+        justify="center"
+        alignItems="center"
+        alignContent="center"
+      >
+        <Grid item xs={12} sm={6}>
+          <Box sx={{ width: 300, height: 300, margin: 'auto' }}>
+            <img src={product.imgUrl} loading="lazy" />
+          </Box>
+        </Grid>
+        <Grid item xs={12} sm={6}>
+          <ProductInfo {...product} />
+        </Grid>
+      </Grid>
+    </div>
+  );
 };
 
 ProductDetailPage.propTypes = {
