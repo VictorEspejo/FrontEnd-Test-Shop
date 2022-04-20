@@ -19,6 +19,10 @@ function ProductInfo(product) {
       setcantidad(event.target.value);
   };
 
+  const handleSubmit = () => { 
+    product.addToCart({cantidad, color});
+   }
+
   return (
     <>
       {product ? (
@@ -31,6 +35,7 @@ function ProductInfo(product) {
             storages={product?.options?.storages}
             handleColorChange={handleColorChange}
             handleAmountChange={handleAmountChange}
+            handleSubmitButton={handleSubmit}
           />
         </>
       ) : (
@@ -41,6 +46,7 @@ function ProductInfo(product) {
 }
 
 ProductInfo.propTypes = {
+  addToCart: PropTypes.func,
   brand: PropTypes.string,
   model: PropTypes.string,
   price: PropTypes.number,

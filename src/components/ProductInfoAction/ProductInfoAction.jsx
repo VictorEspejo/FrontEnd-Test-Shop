@@ -45,7 +45,9 @@ const ProductInfoAction = (props) => {
           </Grid>
         </CardContent>
         <CardActionArea>
-            <Button color={"primary"} >Añadir al carrito</Button>
+          <Button onClick={props.handleSubmitButton} color={"primary"}>
+            Añadir al carrito
+          </Button>
         </CardActionArea>
       </Card>
     </Grid>
@@ -67,6 +69,7 @@ ProductInfoAction.propTypes = {
   ),
   handleColorChange: PropTypes.func.isRequired,
   handleAmountChange: PropTypes.func.isRequired,
+  handleSubmitButton: PropTypes.func.isRequired,
 };
 
 export default ProductInfoAction;
