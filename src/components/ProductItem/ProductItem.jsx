@@ -6,11 +6,10 @@ import {
   CardContent,
   Typography,
   CardActions,
-  Button,
 } from "@mui/material";
 
 const ProductItem = ({
-  product: {id, imgUrl, brand,model, price}
+  product: {imgUrl, brand,model, price}
 }) => {
   return (
     <Card sx={{ maxWidth: 345 }}>

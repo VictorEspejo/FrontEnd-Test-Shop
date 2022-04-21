@@ -1,0 +1,4 @@
+*.test.js
+/build
+/node-modules
+.eslintrc.json

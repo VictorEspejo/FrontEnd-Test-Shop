@@ -1,6 +1,6 @@
 const initialValue = {
   products: [],
-  headerTitle: 'Shopping List'
+  headerTitle: "Shopping List"
 };
 
 export const ACTIONS = {
@@ -10,12 +10,12 @@ export const ACTIONS = {
 
 const reducer = (state = initialValue, action) => {
   switch (action.type) {
-    case ACTIONS.addProduct:
-      return {...state, products: [...state.products, action.payload]};
-    case ACTIONS.changeHeaderTitle:
-      return { ...state, headerTitle: action.payload };
-      default:
-      return state;
+  case ACTIONS.addProduct:
+    return {...state, products: [...state.products, action.payload]};
+  case ACTIONS.changeHeaderTitle:
+    return { ...state, headerTitle: action.payload };
+  default:
+    return state;
   }
 };
 

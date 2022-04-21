@@ -1,12 +1,12 @@
+import React from "react";
 import { Route, Routes } from "react-router-dom";
-import ProductCartPage from "../../pages/ProductCartPage";
-import ProductDetailPage from "../../pages/ProductDetailPage";
-import ProductListPage from "../../pages/ProductListPage";
+import ProductCartPage from "../../pages/ProductCartPage.jsx";
+import ProductDetailPage from "../../pages/ProductDetailPage.jsx";
+import ProductListPage from "../../pages/ProductListPage.jsx";
 import Container from "@mui/material/Container";
 import Grid from "@mui/material/Grid";
 
 const AppContainer = () => {
-
   return (
     <Container fixed>
       <Grid item xs />

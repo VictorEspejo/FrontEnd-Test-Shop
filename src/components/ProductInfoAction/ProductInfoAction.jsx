@@ -28,7 +28,7 @@ const ProductInfoAction = (props) => {
                   label={"Storages"}
                   onChange={props.handleStorage}
                 >
-                  {(props?.storages || []).map((storage, index) => (
+                  {(props?.storages || []).map((storage) => (
                     <MenuItem key={storage?.code} value={storage?.code}>
                       {storage?.name}
                     </MenuItem>

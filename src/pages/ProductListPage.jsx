@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from "react";
 import { Input, Grid, Typography, Skeleton } from "@mui/material";
-import ProductItem from "../components/ProductItem/ProductItem";
+import ProductItem from "../components/ProductItem/ProductItem.jsx";
 import { Link } from "react-router-dom";
-import { ENDPOINTS } from "../constants";
+import { ENDPOINTS } from "../constants/index.js";
 import { ACTIONS } from "../reducers";
 import { connect } from "react-redux";
 
@@ -17,9 +17,9 @@ const ProductListPage = ({changeHeaderTitle}) => {
     setSearchTerm(event.target.value);
   };
 
-    useEffect(() => {
-      changeHeaderTitle("Shopping List");
-    }, []);
+  useEffect(() => {
+    changeHeaderTitle("Shopping List");
+  }, []);
 
   useEffect(() => {
     console.log("Cargando...");

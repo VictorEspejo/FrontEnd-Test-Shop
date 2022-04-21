@@ -1,7 +1,7 @@
 import React from "react";
 import PropTypes from "prop-types";
 import { Link } from "react-router-dom";
-import './index.css';
+import "./index.css";
 
 import {
   List,
@@ -10,7 +10,6 @@ import {
   Typography,
   ListItemText,
   Divider,
-  Button,
   Grid
 } from "@mui/material";
 const ShoppingCartList = ({ products }) => {

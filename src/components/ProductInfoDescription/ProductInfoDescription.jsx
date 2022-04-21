@@ -1,4 +1,4 @@
-import React from 'react'
+import React from "react"
 import {
   Card,
   CardContent,
@@ -12,10 +12,11 @@ import {
 
 const ProductInfoDescription = ({product}) => {
 
-      const showCameraInfo = (camera, msg) => {
-        let prText = typeof camera === "array" ? camera.join() : camera;
-        return `${msg}: ${prText}`;
-      };
+  const showCameraInfo = (camera, msg) => {
+    // eslint-disable-next-line valid-typeof
+    let prText = typeof camera === "array" ? camera.join() : camera;
+    return `${msg}: ${prText}`;
+  };
 
   return (
     <Card sx={{ minWidth: 275 }}>
@@ -31,7 +32,7 @@ const ProductInfoDescription = ({product}) => {
           </Grid>
           <Grid item xs={6}>
             <Typography variant="h6" color="secondary">
-              {product.price || '-'} €
+              {product.price || "-"} €
             </Typography>
           </Grid>
         </Grid>
@@ -80,7 +81,7 @@ const ProductInfoDescription = ({product}) => {
             <ListItemText
               inset
               primary={"Peso"}
-              secondary={`${product.weight || '-'} mg`}
+              secondary={`${product.weight || "-"} mg`}
             ></ListItemText>
           </ListItem>
           <Divider />

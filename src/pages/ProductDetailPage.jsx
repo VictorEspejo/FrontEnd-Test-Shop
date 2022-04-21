@@ -3,10 +3,10 @@ import { connect } from "react-redux";
 import { ACTIONS } from "../reducers";
 import { useParams } from "react-router-dom";
 import PropTypes from "prop-types";
-import { ENDPOINTS } from "../constants";
+import { ENDPOINTS } from "../constants/index.js";
 import { Grid, Box } from "@mui/material";
 import { mapProductInfo } from "../utils/productsUtils";
-import ProductInfo from "../components/ProductInfo/ProductInfo";
+import ProductInfo from "../components/ProductInfo/ProductInfo.jsx";
 
 const setCartProduct = (body) => {
   const bodyjson = JSON.stringify(body);
@@ -55,10 +55,11 @@ const ProductDetailPage = ({
 
   const addToCart = useCallback(
     (productInfo) => {
+      const id = `${cartProducts.length + 1}`.padStart(4, "0");
       const productCart = {
         ...productInfo,
         productId: prodId,
-        id: cartProducts.length + 1,
+        id,
       };
       if (productCart) {
         setCartProduct(mapProductToCart(productCart)).then((data) => {
@@ -81,7 +82,7 @@ const ProductDetailPage = ({
       >
         <Grid item xs={12} sm={6}>
           <Box sx={{ width: 300, height: 300, margin: "auto" }}>
-            <img src={product.imgUrl} loading="lazy" />
+            <img src={product.imgUrl} loading="lazy" alt={product.model}/>
           </Box>
         </Grid>
         <Grid item xs={12} sm={6}>

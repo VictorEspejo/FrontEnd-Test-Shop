@@ -1,8 +1,8 @@
 import React, { useState } from "react";
 import PropTypes from "prop-types";
 import { Typography, Grid } from "@mui/material";
-import ProductInfoAction from "../ProductInfoAction/ProductInfoAction";
-import ProductInfoDescription from "../ProductInfoDescription/ProductInfoDescription";
+import ProductInfoAction from "../ProductInfoAction/ProductInfoAction.jsx";
+import ProductInfoDescription from "../ProductInfoDescription/ProductInfoDescription.jsx";
 
 function ProductInfo(product) {
   const [storage, setstorage] = useState(0);
