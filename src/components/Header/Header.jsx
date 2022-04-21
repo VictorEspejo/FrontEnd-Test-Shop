@@ -1,24 +1,41 @@
-import React from 'react'
-import AppBar from "@mui/material/AppBar";
-import Toolbar from "@mui/material/Toolbar";
-import IconButton from "@mui/material/IconButton";
-import Typography from "@mui/material/Typography";
+import React, { useEffect, useState } from "react";
+import { AppBar, Toolbar, IconButton, Badge, Typography } from "@mui/material";
 import Menu from "@mui/icons-material/Menu";
+import ShoppingCartCheckoutIcon from "@mui/icons-material/ShoppingCartCheckout";
 import { Link } from "react-router-dom";
+import { connect } from "react-redux";
 
-const Header = () => {
+const Header = ({ products, headerTitle }) => {
+  const [cartLenght, setcartLenght] = useState(0);
+
+  useEffect(() => {
+    if (products) {
+      setcartLenght(products.length);
+    }
+  }, [products]);
+
   return (
     <AppBar position="relative" color="primary">
       <Toolbar>
-        <Link to="/">
-          <IconButton edge="start" color="inherit" aria-label="menu">
-            <Menu />
-          </IconButton>
-        </Link>
-        <Typography variant="h6">MENU</Typography>
+        <IconButton edge="start" color="inherit" aria-label="menu">
+          <Link to="/">
+            <Menu color="action" />
+          </Link>
+        </IconButton>
+        <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
+          {headerTitle}
+        </Typography>
+        <Badge badgeContent={cartLenght} color="secondary">
+          <Link to="shopping-cart">
+            <ShoppingCartCheckoutIcon color="action" />
+          </Link>
+        </Badge>
       </Toolbar>
     </AppBar>
   );
-}
+};
+const mapStateToProps = (state) => {
+  return { products: state.products, headerTitle: state.headerTitle };
+};
 
-export default Header;
+export default connect(mapStateToProps)(Header);

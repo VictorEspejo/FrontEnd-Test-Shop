@@ -1,5 +1,5 @@
 import React, { useEffect, useState, useCallback } from "react";
-import { connect } from 'react-redux';
+import { connect } from "react-redux";
 import { ACTIONS } from "../reducers";
 import { useParams } from "react-router-dom";
 import PropTypes from "prop-types";
@@ -13,16 +13,20 @@ const getProductDetail = (id) => {
   return fetch(apiEndpoint).then((response) => response.json());
 };
 
-const ProductDetailPage = ({ productId, addProduct }) => {
-  const [product, setProduct] = useState({});
+const ProductDetailPage = ({ productId, addProduct, changeHeaderTitle }) => {
+  const [product, setproduct] = useState({});
   const { id } = useParams();
   const prodId = productId || id;
 
   useEffect(() => {
     getProductDetail(prodId).then((res) => {
-      setProduct(mapProductInfo(res));
+      setproduct(mapProductInfo(res));
     });
   }, []);
+
+  useEffect(() => {
+    changeHeaderTitle(product?.model);
+  }, [product])
 
   const addToCart = useCallback(
     (productInfo) => {
@@ -31,8 +35,6 @@ const ProductDetailPage = ({ productId, addProduct }) => {
     },
     [addProduct]
   );
-
-
 
   return (
     <div>
@@ -60,10 +62,13 @@ ProductDetailPage.propTypes = {
   productId: PropTypes.string,
 };
 
-const mapDispatchToProps = (dispatch) => { 
+const mapDispatchToProps = (dispatch) => {
   return {
-    addProduct: (value) => dispatch({ type: ACTIONS.addProduct, payload: value }),
+    addProduct: (payload) =>
+      dispatch({ type: ACTIONS.addProduct, payload }),
+    changeHeaderTitle: (payload) => 
+      dispatch({ type: ACTIONS.changeHeaderTitle, payload})
   };
- }
+};
 
 export default connect(null, mapDispatchToProps)(ProductDetailPage);

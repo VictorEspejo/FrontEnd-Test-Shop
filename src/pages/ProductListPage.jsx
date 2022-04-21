@@ -3,8 +3,10 @@ import { Input, Grid, Typography } from "@mui/material";
 import ProductItem from "../components/ProductItem/ProductItem";
 import { Link } from "react-router-dom";
 import { ENDPOINTS } from "../constants";
+import { ACTIONS } from "../reducers";
+import { connect } from "react-redux";
 
-const ProductListPage = () => {
+const ProductListPage = ({changeHeaderTitle}) => {
   const [productList, setProductList] = useState([]);
   const [isLoading, setisLoading] = useState(true);
   const [searchTerm, setSearchTerm] = useState("");
@@ -14,6 +16,10 @@ const ProductListPage = () => {
   const handleSearch = (event) => {
     setSearchTerm(event.target.value);
   };
+
+    useEffect(() => {
+      changeHeaderTitle("Shopping List");
+    }, []);
 
   useEffect(() => {
     console.log("Cargando...");
@@ -44,7 +50,7 @@ const ProductListPage = () => {
 
   return (
     <Grid container>
-      <Grid id="productlist-header" item container xs={12}>
+      <Grid id="productlist-header" item container xs={12} marginBottom={4}>
         <Grid item xs={8}>
           <Typography variant="h5" color="initial">
             List View
@@ -76,4 +82,11 @@ const ProductListPage = () => {
   );
 };
 
-export default ProductListPage;
+const mapDispatchToProps = (dispatch) => {
+  return {
+    changeHeaderTitle: (payload) =>
+      dispatch({ type: ACTIONS.changeHeaderTitle, payload }),
+  };
+};
+
+export default connect(null, mapDispatchToProps)(ProductListPage);

@@ -1,17 +1,17 @@
 import React from "react";
 import {
-    Button,
-  TextField,
-  FormControl,
+  Button,
+  FormControl, 
   Select,
   InputLabel,
   MenuItem,
   Card,
   CardContent,
   CardActionArea,
-  Typography,
+  IconButton,
   Grid,
 } from "@mui/material";
+import AddShoppingCartIcon from "@mui/icons-material/AddShoppingCart";
 import PropTypes from "prop-types";
 
 const ProductInfoAction = (props) => {
@@ -21,18 +21,20 @@ const ProductInfoAction = (props) => {
         <CardContent>
           <Grid container spacing={2}>
             <Grid item xs={12} md={6}>
-              <Typography>Seleccione la cantidad</Typography>
-              <TextField
-                onChange={props.handleAmountChange}
-                id="outlined-number"
-                label="Cantidad"
-                type="number"
-              />
+              <FormControl fullWidth>
+                <InputLabel>Seleccione tipo de almacenamiento</InputLabel>
+                <Select onChange={props.handleStorage}>
+                  {(props?.storages || []).map((storage, index) => (
+                    <MenuItem key={storage?.code} value={storage?.code}>
+                      {storage?.name}
+                    </MenuItem>
+                  ))}
+                </Select>
+              </FormControl>
             </Grid>
             <Grid item xs={12} md={6}>
-              <Typography>Seleccione el color</Typography>
-              <FormControl>
-                <InputLabel>Color</InputLabel>
+              <FormControl fullWidth>
+                <InputLabel>Seleccione color</InputLabel>
                 <Select onChange={props.handleColorChange}>
                   {(props?.colors || []).map((pcolor, index) => (
                     <MenuItem key={pcolor?.code} value={pcolor?.code}>
@@ -47,6 +49,9 @@ const ProductInfoAction = (props) => {
         <CardActionArea>
           <Button onClick={props.handleSubmitButton} color={"primary"}>
             Añadir al carrito
+            <IconButton>
+              <AddShoppingCartIcon color="primary" />
+            </IconButton>
           </Button>
         </CardActionArea>
       </Card>
@@ -67,9 +72,9 @@ ProductInfoAction.propTypes = {
       name: PropTypes.string,
     })
   ),
-  handleColorChange: PropTypes.func.isRequired,
-  handleAmountChange: PropTypes.func.isRequired,
-  handleSubmitButton: PropTypes.func.isRequired,
+  handleColorChange: PropTypes.func,
+  handleStorage: PropTypes.func,
+  handleSubmitButton: PropTypes.func,
 };
 
 export default ProductInfoAction;

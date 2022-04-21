@@ -1,12 +1,19 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { connect } from "react-redux";
 import { ACTIONS } from "../reducers";
+import ShoppingCartList from '../components/ShoppingCartList/ShoppingCartList'
+import Container from '@mui/material/Container'
 
-const ProductCartPage = ({ removeProduct }) => {
-  const deleteProduct = (id) => {
-    removeProduct(id);
-  }
-  return <div>ProductCartPage</div>;
+const ProductCartPage = ({ products, changeHeaderTitle }) => {
+  useEffect(() => {
+    changeHeaderTitle("Carrito de compra");
+  }, []);
+
+  return (
+    <Container maxWidth="xs">
+      <ShoppingCartList products={products} />
+    </Container>
+  );
 };
 const mapStateToProps = (state) => {
   return { products: state.products };
@@ -14,8 +21,8 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    removeProduct: (value) =>
-      dispatch({ type: ACTIONS.removeProduct, payload: value }),
+    changeHeaderTitle: (payload) =>
+      dispatch({ type: ACTIONS.changeHeaderTitle, payload }),
   };
 };
 
