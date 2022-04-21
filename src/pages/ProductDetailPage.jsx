@@ -64,8 +64,8 @@ const ProductDetailPage = ({
       if (productCart) {
         setCartProduct(mapProductToCart(productCart)).then((data) => {
           console.log(data);
-          addProduct(productCart);
         });
+        addProduct(productCart);
       }
     },
     [addProduct]
