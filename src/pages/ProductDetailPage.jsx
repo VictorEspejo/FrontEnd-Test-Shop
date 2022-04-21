@@ -8,12 +8,37 @@ import { Grid, Box } from "@mui/material";
 import { mapProductInfo } from "../utils/productsUtils";
 import ProductInfo from "../components/ProductInfo/ProductInfo";
 
+const setCartProduct = (body) => {
+  const bodyjson = JSON.stringify(body);
+  return fetch(ENDPOINTS.ADD_PRODUCT_TO_CARD, {
+    method: "POST",
+    mode: "no-cors",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: bodyjson,
+  }).then((response) => response.json());
+};
+
+const mapProductToCart = (product) => {
+  return {
+    id: product.id,
+    colorCode: product.color.code,
+    storageCode: product.storage.code,
+  };
+};
+
 const getProductDetail = (id) => {
   const apiEndpoint = ENDPOINTS.GET_PRODUCT_DETAIL.replace(":id", id);
   return fetch(apiEndpoint).then((response) => response.json());
 };
 
-const ProductDetailPage = ({ productId, addProduct, changeHeaderTitle }) => {
+const ProductDetailPage = ({
+  productId,
+  addProduct,
+  changeHeaderTitle,
+  cartProducts,
+}) => {
   const [product, setproduct] = useState({});
   const { id } = useParams();
   const prodId = productId || id;
@@ -26,12 +51,21 @@ const ProductDetailPage = ({ productId, addProduct, changeHeaderTitle }) => {
 
   useEffect(() => {
     changeHeaderTitle(product?.model);
-  }, [product])
+  }, [product]);
 
   const addToCart = useCallback(
     (productInfo) => {
-      const productCart = { ...productInfo, productId: prodId };
-      addProduct(productCart);
+      const productCart = {
+        ...productInfo,
+        productId: prodId,
+        id: cartProducts.length + 1,
+      };
+      if (productCart) {
+        setCartProduct(mapProductToCart(productCart)).then((data) => {
+          console.log(data);
+          addProduct(productCart);
+        });
+      }
     },
     [addProduct]
   );
@@ -64,11 +98,14 @@ ProductDetailPage.propTypes = {
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    addProduct: (payload) =>
-      dispatch({ type: ACTIONS.addProduct, payload }),
-    changeHeaderTitle: (payload) => 
-      dispatch({ type: ACTIONS.changeHeaderTitle, payload})
+    addProduct: (payload) => dispatch({ type: ACTIONS.addProduct, payload }),
+    changeHeaderTitle: (payload) =>
+      dispatch({ type: ACTIONS.changeHeaderTitle, payload }),
   };
 };
 
-export default connect(null, mapDispatchToProps)(ProductDetailPage);
+const mapStateToProps = (state) => {
+  return { cartProducts: state.products };
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(ProductDetailPage);
