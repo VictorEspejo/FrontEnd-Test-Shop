@@ -1,7 +1,7 @@
 import React from "react";
 import {
   Button,
-  FormControl, 
+  FormControl,
   Select,
   InputLabel,
   MenuItem,
@@ -23,7 +23,11 @@ const ProductInfoAction = (props) => {
             <Grid item xs={12} md={6}>
               <FormControl fullWidth>
                 <InputLabel>Seleccione tipo de almacenamiento</InputLabel>
-                <Select onChange={props.handleStorage}>
+                <Select
+                  error={props.storageError}
+                  label={"Storages"}
+                  onChange={props.handleStorage}
+                >
                   {(props?.storages || []).map((storage, index) => (
                     <MenuItem key={storage?.code} value={storage?.code}>
                       {storage?.name}
@@ -35,9 +39,13 @@ const ProductInfoAction = (props) => {
             <Grid item xs={12} md={6}>
               <FormControl fullWidth>
                 <InputLabel>Seleccione color</InputLabel>
-                <Select onChange={props.handleColorChange}>
+                <Select
+                  error={props.colorError}
+                  label={"Colors"}
+                  onChange={props.handleColorChange}
+                >
                   {(props?.colors || []).map((pcolor, index) => (
-                    <MenuItem key={pcolor?.code} value={pcolor?.code}>
+                    <MenuItem key={index} value={pcolor?.code}>
                       {pcolor?.name}
                     </MenuItem>
                   ))}
@@ -60,6 +68,8 @@ const ProductInfoAction = (props) => {
 };
 
 ProductInfoAction.propTypes = {
+  colorError: PropTypes.bool,
+  storageError: PropTypes.bool,
   colors: PropTypes.arrayOf(
     PropTypes.shape({
       code: PropTypes.number,

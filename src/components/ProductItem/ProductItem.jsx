@@ -16,21 +16,21 @@ const ProductItem = ({
     <Card sx={{ maxWidth: 345 }}>
       <CardMedia
         component="img"
-        width="200"
-        height="200"
+        width={180}
+        height={180}
         image={imgUrl}
         alt={`${brand}-${model}`}
       />
       <CardContent>
         <Typography gutterBottom variant="h5" component="div">
-          { model }
+          {model}
         </Typography>
         <Typography variant="body2" color="secondary">
-          { brand }
+          {brand}
         </Typography>
       </CardContent>
       <CardActions>
-        <Button size="small">{ price }€</Button>
+        <Typography color={"secondary"}>{price || "-"}€</Typography>
       </CardActions>
     </Card>
   );

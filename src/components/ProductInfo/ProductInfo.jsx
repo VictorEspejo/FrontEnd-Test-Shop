@@ -7,6 +7,8 @@ import ProductInfoDescription from "../ProductInfoDescription/ProductInfoDescrip
 function ProductInfo(product) {
   const [storage, setstorage] = useState(0);
   const [color, setcolor] = useState(0);
+  const [colorError, setcolorError] = useState(false);
+  const [storageError, setstorageError]= useState(false);
 
   const handleColorChange = (event) => {
     setcolor(event.target.value);
@@ -18,9 +20,14 @@ function ProductInfo(product) {
 
   const handleSubmit = () => {
     const { imgUrl, price, model, options } = product;
-    const pStorage = options.storages.find(item => item.code === storage) || {};
-    const pColor = options.colors.find(item => item.code === color) || {};
-    product.addToCart({ storage: pStorage, color: pColor, imgUrl, price, model });
+    const pStorage = options.storages.find(item => item.code === storage) || null;
+    const pColor = options.colors.find(item => item.code === color) || null;
+    if(pStorage && pColor){
+      product.addToCart({ storage: pStorage, color: pColor, imgUrl, price, model });
+    }else{
+      setstorageError(!pStorage);
+      setcolorError(!pColor);
+    }
   };
 
   return (
@@ -33,6 +40,8 @@ function ProductInfo(product) {
           <ProductInfoAction
             colors={product?.options?.colors}
             storages={product?.options?.storages}
+            colorError={colorError}
+            storageError={storageError}
             handleColorChange={handleColorChange}
             handleStorage={handleStorage}
             handleSubmitButton={handleSubmit}

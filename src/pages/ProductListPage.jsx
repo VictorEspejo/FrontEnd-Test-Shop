@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Input, Grid, Typography } from "@mui/material";
+import { Input, Grid, Typography, Skeleton } from "@mui/material";
 import ProductItem from "../components/ProductItem/ProductItem";
 import { Link } from "react-router-dom";
 import { ENDPOINTS } from "../constants";
@@ -66,7 +66,7 @@ const ProductListPage = ({changeHeaderTitle}) => {
         </Grid>
       </Grid>
       <Grid id="productlist-body" item container spacing={4} xs={12}>
-        { !isLoading ? (
+        {!isLoading ? (
           dataShowed.map((product, index) => (
             <Grid key={index} item xs={3}>
               <Link to={`/product/${product.id}`}>
@@ -75,7 +75,40 @@ const ProductListPage = ({changeHeaderTitle}) => {
             </Grid>
           ))
         ) : (
-          <Typography>Cargando productos...</Typography>
+          <>
+            <Grid item xs={3}>
+              <Skeleton
+                variant="rectangle"
+                width={200}
+                height={200}
+                animation="wave"
+              />
+            </Grid>
+            <Grid item xs={3}>
+              <Skeleton
+                variant="rectangle"
+                width={200}
+                height={200}
+                animation="wave"
+              />
+            </Grid>
+            <Grid item xs={3}>
+              <Skeleton
+                variant="rectangle"
+                width={200}
+                height={200}
+                animation="wave"
+              />
+            </Grid>
+            <Grid item xs={3}>
+              <Skeleton
+                variant="rectangle"
+                width={200}
+                height={200}
+                animation="wave"
+              />
+            </Grid>
+          </>
         )}
       </Grid>
     </Grid>
